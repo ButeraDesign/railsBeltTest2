@@ -10,17 +10,19 @@ class SessionsController < ApplicationController
 
   def create
     #binding.pry
-    @user = User.find_by_email(params[:email]).try(:authenticate, params[:password])
+    @lender = Lender.find_by_email(params[:email]).try(:authenticate, params[:password])
 
-    if @user
-      session[:user_id] = @user.id
+    if @lender
+      session[:user_id] = @lender.id
       #redirect_to "/dashboard/#{@user.id}"
-      redirect_to "/users/#{@user.id}"
+      redirect_to "/lender/#{@lender.id}"
     else
-      puts 'Create Error'
-      flash[:errorsLogin] = ["Invalid Email or PW"]
+      @borrower = Borrower.find_by_email(params[:email]).try(:authenticate, params[:password])
+      session[:user_id] = @borrower.id
+      #puts 'Create Error'
+      #flash[:errorsLogin] = ["Invalid Email or PW"]
       # redirect_to :back
-      redirect_to "/users/new"
+      redirect_to "/borrower/#{@borrower.id}"
     end
 
   end

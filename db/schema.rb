@@ -10,10 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170625175000) do
+ActiveRecord::Schema.define(version: 20170625194951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "borrowers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest"
+    t.integer "money"
+    t.string "purpose"
+    t.text "description"
+    t.integer "raised"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "histories", force: :cascade do |t|
+    t.integer "amount"
+    t.bigint "lender_id"
+    t.bigint "borrower_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["borrower_id"], name: "index_histories_on_borrower_id"
+    t.index ["lender_id"], name: "index_histories_on_lender_id"
+  end
+
+  create_table "lenders", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest"
+    t.integer "money"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
@@ -24,4 +57,6 @@ ActiveRecord::Schema.define(version: 20170625175000) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "histories", "borrowers"
+  add_foreign_key "histories", "lenders"
 end

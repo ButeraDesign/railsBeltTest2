@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
     #puts 'In Show'
-    @user = User.find(session[:user_id])
+    #@user = User.find(session[:user_id])
     #@allShoes = Shoe.all
     #@shoesForSale = Shoe.all.where(sold: false, seller_id: session[:user_id])
     #@shoesSold = Shoe.all.where(sold: true, seller_id: session[:user_id])
@@ -21,20 +21,20 @@ class UsersController < ApplicationController
     puts 'In Create'
     #formParams = params[:user]
     #binding.pry
-    @user = User.new(user_params)
+    ##@user = User.new(user_params)
     #binding.pry
 
-    if @user.save
+    ##if @user.save
       #user created, have them logon now (or maybe log them in and go to show?)
-      session[:user_id] = @user.id
+      ##session[:user_id] = @user.id
       #redirect_to "/dashboard/#{@user.id}"
-      redirect_to "/users/#{@user.id}"
-    else
-      puts 'Create Error'
-      flash[:errorsUser] = @user.errors.full_messages
+      ##redirect_to "/users/#{@user.id}"
+    ##else
+      ##puts 'Create Error'
+      ##flash[:errorsUser] = @user.errors.full_messages
       # redirect_to :back
-      redirect_to "/users/new"
-    end
+      ##redirect_to "/users/new"
+  ##  end
   end
 
   def new

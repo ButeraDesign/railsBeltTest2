@@ -1,0 +1,50 @@
+<div class = "container">
+<div class = "row">
+
+<div class="col-md-4 well">
+<h1>Lender</h1>
+<% if flash[:errorsLender] %>
+	<% flash[:errorsLender].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+<form class="table well" action='/lenders/' method='post'>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  Email:<input type='text' name='lender[email]'  /><br>
+  First Name:<input type='text' name='lender[first_name]'  /><br>
+  Last Name:<input type='text' name='lender[last_name]'  /><br>
+  Password:<input type='text' name='lender[password]'  /><br>
+  Password Confirmation:<input type='text' name='lender[password_confirmation]'  /><br>
+  Money:<input type='number' name='lender[money]' value='0.00'/><br>
+
+  <input type='submit' value='Register' />
+</form>
+</div>
+
+
+<div class="col-md-4 well">
+<h1>Borrower</h1>
+<% if flash[:errorsBorrower] %>
+	<% flash[:errorsBorrower].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+<form class="table well" action='/borrowers/' method='post'>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  Email:<input type='text' name='borrower[email]'  /><br>
+  First Name:<input type='text' name='borrower[first_name]'  /><br>
+  Last Name:<input type='text' name='borrower[last_name]'  /><br>
+  Password:<input type='text' name='borrower[password]'  /><br>
+  Password Confirmation:<input type='text' name='borrower[password_confirmation]'  /><br>
+  Need Money For:<input type='text' name='borrower[purpose]' ><br>
+  Discription: <br><textarea name='borrower[description]'></textarea><br>
+  Amount Needed:<input type='number' name='borrower[money]' value='0.00'/><br>
+  <input type="hidden" name="borrower[raised]" value="0" /><br>
+
+
+  <input type='submit' value='Register' />
+</form>
+</div>
+
+</div>
+</div>
